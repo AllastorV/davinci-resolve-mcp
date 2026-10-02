@@ -2,6 +2,23 @@
 
 Release history for the DaVinci Resolve MCP Server. The latest release is summarized in the root README; older entries live here to keep the README focused.
 
+## Unreleased — subtitle tracks
+
+- Added advanced `project_db` actions to list/copy animated subtitle presets,
+  edit Word Highlight inputs, and read/write/check caption text and word timing.
+  New writes require Resolve fully quit, take unique SQLite snapshots and verify
+  inside an atomic transaction. Basic track styles remain a separate surface.
+- Added Windows/Linux project-library discovery, a `node:sqlite` fallback and
+  native zstd decoding when available. Subtitle `set_property` calls are refused
+  before automatic timeline archiving.
+- Fixed missing Lua separators when inserting absent preset controls. The
+  malformed composition previously passed database readback but made Resolve's
+  viewer black. A regression test covers Resolve's omitted trailing comma.
+- Validation: focused codec/database tests and manual Studio 21.1.0.17
+  reopen/viewer/Inspector checks confirmed Word Highlight with explicit colours,
+  font and center position. Full automated render acceptance remains required. See
+  [subtitle-track editing](docs/guides/subtitle-track-editing.md).
+
 ## What's New in v4.8.28 — ffmpeg can no longer hang on the protocol stream; a cancelled call no longer kills the server
 
 ### Fixed
